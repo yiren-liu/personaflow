@@ -294,13 +294,12 @@ Once the backend is running, visit http://localhost:8321/docs for interactive AP
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-This research system was developed as part of an HCI research project to support researchers in generating and exploring research questions through AI-assisted workflows.
 
 ## 📞 Contact
 
-For questions about the research or system implementation, please reach out through GitHub Issues or the project maintainers.
+For questions about the research or system implementation, please reach out through GitHub Issues or contact the project maintainers:
+
+**Yiren Liu** - yirenl2@illinois.edu
 
 ---
 
