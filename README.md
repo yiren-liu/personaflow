@@ -1,12 +1,21 @@
-![3715336](https://github.com/user-attachments/assets/464cfa61-7805-46f7-8556-7a49a16c0083)# PersonaFlow: AI-Powered Research Workflow System
+# PersonaFlow: AI-Powered Research Workflow System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Node.js 20+](https://img.shields.io/badge/node-20+-green.svg)](https://nodejs.org/)
 
-**PersonaFlow** is an AI-powered research workflow system designed for Human-Computer Interaction (HCI) researchers and academics. It helps researchers generate, refine, and explore research questions through AI-driven personas, automated literature analysis, and iterative critique processes.
 
 ![3715336](https://github.com/user-attachments/assets/e6415263-c624-41e1-92e1-1514d7ce7069)
+
+
+**PersonaFlow** is an AI-powered research workflow system designed for Human-Computer Interaction (HCI) researchers and academics. It helps researchers generate, refine, and explore research questions through AI-driven personas, automated literature analysis, and iterative critique processes.
+
+
+**Check out our recent publication:**
+
+> Liu, Y., Sharma, P., Oswal, M., Xia, H., & Huang, Y. (2025, July). PersonaFlow: Designing LLM-Simulated Expert Perspectives for Enhanced Research Ideation. *Proceedings of the 2025 ACM Designing Interactive Systems Conference*, 506-534.
+
+**📖 [Read the paper](https://dl.acm.org/doi/10.1145/3715336.3735789)**
 
 
 ## 🌟 Features
