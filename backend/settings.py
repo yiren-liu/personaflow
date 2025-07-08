@@ -7,8 +7,6 @@ class Settings(BaseSettings):
     openai_api_key: Optional[str] = Field(default=None, validation_alias="OPENAI_API_KEY")
     openai_api_base: Optional[str] = Field(default=None, validation_alias="OPENAI_API_BASE")
     s2_api_key: Optional[str] = Field(default=None, validation_alias="S2_API_KEY")
-    youtube_playlist_id: Optional[str] = Field(default=None, validation_alias="YOUTUBE_PLAYLIST_ID")
-    google_application_credentials: Optional[str] = Field(default=None, validation_alias="GOOGLE_APPLICATION_CREDENTIALS")
     reranker_type: Optional[str] = Field(default=None, validation_alias="RERANKER_TYPE")
     sagamaker_cls_endpoint: Optional[str] = Field(default=None, validation_alias="SAGEMAKER_CLS_ENDPOINT")
     hf_model_id: Optional[str] = Field(default=None, validation_alias="HF_MODEL_ID")
