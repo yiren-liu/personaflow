@@ -1,0 +1,2 @@
+class CustomOpenAIException(Exception):
+    pass

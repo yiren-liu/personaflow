@@ -1,0 +1,9 @@
+@keyframes pulse-red {
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px red; /* Increase the size of the glow */
+  }
+  50% {
+    box-shadow: 0 0 0 3px red; /* Increase the size of the glow */
+  }
+}

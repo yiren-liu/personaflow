@@ -1,0 +1,44 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
+
+# Install necessary system dependencies
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    libmariadb-dev-compat \
+    libmariadb-dev \
+    gcc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy requirements first for better Docker layer caching
+COPY ./requirements.txt /app/requirements.txt
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Download spaCy model
+RUN python -m spacy download en_core_web_sm
+
+# Copy the application code
+COPY . /app
+
+# Copy the start script
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# Create non-root user for security
+RUN useradd --create-home --shell /bin/bash app && \
+    chown -R app:app /app
+USER app
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8321/docs || exit 1
+
+# Expose port
+EXPOSE 8321
+
+# Set the entry point to the start script
+ENTRYPOINT ["/app/start.sh"]

@@ -1,0 +1,128 @@
+name: 🐛 Bug Report
+description: Report a bug to help us improve PersonaFlow
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! Please fill out the following information to help us reproduce and fix the issue.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 🐛 Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe the bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 🔄 Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: ✅ Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: ❌ Actual Behavior
+      description: A clear and concise description of what actually happened.
+      placeholder: What actually happened?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🧩 Component
+      description: Which component is affected?
+      options:
+        - Frontend (React UI)
+        - Backend (FastAPI)
+        - Database
+        - Docker/Deployment
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🖥️ Environment
+      description: Please complete the following information
+      value: |
+        - OS: [e.g., macOS 14.0, Ubuntu 22.04, Windows 11]
+        - Python Version: [e.g., 3.10.8]
+        - Node.js Version: [e.g., 20.0.0]
+        - Browser: [e.g., Chrome 120, Firefox 121, Safari 17]
+        - Docker Version: [e.g., 24.0.0]
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: 📋 Error Logs
+      description: If applicable, add error logs to help explain your problem.
+      placeholder: Paste error logs here...
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 📸 Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+      placeholder: You can paste images directly here or drag and drop them.
+
+  - type: dropdown
+    id: deployment-method
+    attributes:
+      label: 🚀 Deployment Method
+      description: How are you running PersonaFlow?
+      options:
+        - Local development (npm/python)
+        - Docker Compose
+        - Docker (individual containers)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📝 Additional Context
+      description: Add any other context about the problem here.
+      placeholder: Any additional information that might be helpful...
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: ✅ Confirmation
+      description: By submitting this issue, you confirm that...
+      options:
+        - label: I have searched for existing issues to avoid duplicates
+          required: true
+        - label: I have provided all the requested information
+          required: true
+        - label: I understand this is a bug report, not a feature request
+          required: true 

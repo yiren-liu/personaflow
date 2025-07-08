@@ -1,0 +1,42 @@
+[
+  {
+    "sender": { "name": "AI Researcher" },
+    "text": "Based on this literature, I think LLM can help improve...",
+    "isOwnMessage": false
+  },
+  {
+    "sender": { "name": "Creative Writer" },
+    "text": "I agree with you but ...",
+    "isOwnMessage": false
+  },
+  {
+    "sender": { "name": "Literary Critic" },
+    "text": "Your Point is great I think you should also consider...",
+    "isOwnMessage": false
+  },
+  {
+    "sender": { "name": "You" },
+    "text": "How about using... for ...?",
+    "isOwnMessage": true
+  },
+  {
+    "sender": { "name": "AI Researcher" },
+    "text": "Based on this literature, I think LLM can help improve...",
+    "isOwnMessage": false
+  },
+  {
+    "sender": { "name": "Creative Writer" },
+    "text": "I agree with you but ...",
+    "isOwnMessage": false
+  },
+  {
+    "sender": { "name": "Literary Critic" },
+    "text": "Your Point is great I think you should also consider...",
+    "isOwnMessage": false
+  },
+  {
+    "sender": { "name": "You" },
+    "text": "How about using... for ...?",
+    "isOwnMessage": true
+  }
+]

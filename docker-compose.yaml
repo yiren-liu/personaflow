@@ -1,0 +1,149 @@
+version: "3.8"
+
+services:
+  # Redis for caching and session management
+  redis:
+    image: "bitnami/redis:latest"
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/bitnami/redis/data
+    networks:
+      - personaflow-network
+
+  # PostgreSQL Database (Optional - can use Supabase instead)
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: personaflow
+      POSTGRES_USER: personaflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-your_secure_password_here}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - personaflow-network
+    # Uncomment to use this database instead of Supabase
+    # profiles:
+    #   - local-db
+
+  # Backend API Service
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: dockerfile
+    restart: always
+    ports:
+      - '8321:8321'
+    env_file:
+      - ./backend/.env.block
+      - ./backend/rds.env
+    environment:
+      # Override Redis host for Docker network
+      - REDIS_HOST=redis
+      # Use local PostgreSQL if enabled
+      - RQGEN_DB_HOST=postgres
+      # For production, use proper secrets management
+    depends_on:
+      - redis
+      # Uncomment if using local PostgreSQL
+      # - postgres
+    volumes:
+      # Mount logs directory for persistence
+      - ./backend/logs:/app/logs
+      # Mount for Google service account (if using Google Docs export)
+      # - ./backend/service_account_key.json:/app/service_account_key.json:ro
+    networks:
+      - personaflow-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8321/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Web Application
+  frontend:
+    build:
+      context: ./frontend/rq-flow
+      dockerfile: dockerfile
+      args:
+        - BACKEND_URL=http://backend:8321
+    restart: always
+    ports:
+      - '3000:80'
+    environment:
+      # For runtime configuration
+      - VITE_BACKEND_URL=http://localhost:8321
+      # For production, use your domain
+      # - VITE_BACKEND_URL=https://api.yourdomain.com
+    depends_on:
+      - backend
+    networks:
+      - personaflow-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: Nginx reverse proxy for production
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - personaflow-network
+    # Only run in production
+    profiles:
+      - production
+
+volumes:
+  redis_data:
+    driver: local
+  postgres_data:
+    driver: local
+
+networks:
+  personaflow-network:
+    driver: bridge
+
+# ============================================================================
+# Usage Instructions
+# ============================================================================
+
+# Development (with Supabase):
+# 1. Copy environment files: 
+#    cp backend/.env.example backend/.env.block
+#    cp backend/rds.env.example backend/rds.env
+# 2. Fill in your API keys and Supabase credentials
+# 3. Run: docker-compose up --build
+
+# Development (with local PostgreSQL):
+# 1. Set up environment files as above
+# 2. Update rds.env to use postgres as host
+# 3. Run: docker-compose --profile local-db up --build
+
+# Production:
+# 1. Set up environment files with production values
+# 2. Configure nginx/nginx.conf for your domain
+# 3. Run: docker-compose --profile production up -d --build
+
+# For development with hot reload:
+# - Run backend and frontend separately using npm/python
+# - Only run: docker-compose up redis
+# - Use the development servers for faster iteration
