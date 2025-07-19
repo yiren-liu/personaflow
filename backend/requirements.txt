@@ -180,7 +180,7 @@ json_repair
 text_generation
 transformers
 faiss-cpu==1.8.0
-pyautogen
+ag2
 Collapse
 xinference-client==0.14.0
 cohere
